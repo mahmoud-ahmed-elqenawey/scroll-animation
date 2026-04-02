@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme inline {
@@ -9,9 +8,9 @@
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #8892B0;
   --color-highlight: #C9A96E;
-  --font-heading: 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
-  --font-arabic: 'Cairo', sans-serif;
+  --font-heading: 'Cairo', 'Inter', system-ui, sans-serif;
+  --font-body: 'Cairo', 'Inter', system-ui, sans-serif;
+  --font-arabic: 'Cairo', system-ui, sans-serif;
 }
 
 * {

@@ -89,17 +89,17 @@ export default function Hero() {
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0C0C1D] via-[#0A0A0A] to-[#0A0A0A]" />
 
-      {/* Particles */}
+      {/* Particles — deterministic positions to avoid hydration mismatch */}
       <div className="particle-bg">
         {Array.from({ length: 30 }).map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-accent/20 rounded-full animate-pulse"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`,
+              left: `${((i * 37 + 13) % 100)}%`,
+              top: `${((i * 53 + 7) % 100)}%`,
+              animationDelay: `${(i * 0.17) % 5}s`,
+              animationDuration: `${3 + (i * 0.13) % 4}s`,
             }}
           />
         ))}

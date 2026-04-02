@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { MeshDistortMaterial } from "@react-three/drei";
 import * as THREE from "three";
 
 export default function ToothModel() {
@@ -20,13 +19,12 @@ export default function ToothModel() {
       {/* Tooth crown */}
       <mesh position={[0, 0.3, 0]}>
         <capsuleGeometry args={[0.55, 0.5, 16, 32]} />
-        <MeshDistortMaterial
+        <meshPhysicalMaterial
           color="#f0f0f0"
           roughness={0.15}
           metalness={0.1}
-          distort={0.05}
-          speed={2}
-          envMapIntensity={1.5}
+          clearcoat={1}
+          clearcoatRoughness={0.1}
         />
       </mesh>
 
