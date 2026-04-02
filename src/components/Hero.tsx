@@ -1,0 +1,150 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollIndicator from "./ui/ScrollIndicator";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const Scene = dynamic(() => import("./3d/Scene"), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="w-16 h-16 border-2 border-accent border-t-transparent rounded-full animate-spin" />
+    </div>
+  ),
+});
+
+export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const sceneWrapperRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Title letter animation
+      if (titleRef.current) {
+        const text = titleRef.current.textContent || "";
+        titleRef.current.innerHTML = text
+          .split("")
+          .map(
+            (char) =>
+              `<span class="inline-block opacity-0 translate-y-[40px]">${char === " " ? "&nbsp;" : char}</span>`
+          )
+          .join("");
+
+        gsap.to(titleRef.current.querySelectorAll("span"), {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.04,
+          ease: "power3.out",
+          delay: 0.5,
+        });
+      }
+
+      // Subtitle fade in
+      gsap.fromTo(
+        subtitleRef.current,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, delay: 1.5, ease: "power3.out" }
+      );
+
+      // Scroll-driven exit animations
+      if (sectionRef.current) {
+        gsap.to(titleRef.current, {
+          y: -100,
+          opacity: 0,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+
+        gsap.to(subtitleRef.current, {
+          y: -60,
+          opacity: 0,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "70% top",
+            scrub: true,
+          },
+        });
+
+        if (sceneWrapperRef.current) {
+          gsap.to(sceneWrapperRef.current, {
+            scale: 0.3,
+            x: "40vw",
+            y: "-30vh",
+            opacity: 0.3,
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0C0C1D] via-[#0A0A0A] to-[#0A0A0A]" />
+
+      {/* Particles */}
+      <div className="particle-bg">
+        {Array.from({ length: 30 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-accent/20 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 4}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* 3D Scene */}
+      <div ref={sceneWrapperRef} className="absolute inset-0 z-[1]">
+        <Scene />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <h1
+          ref={titleRef}
+          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
+          style={{ fontFamily: "'Cairo', sans-serif" }}
+        >
+          عيادة الابتسامة المثالية
+        </h1>
+        <p
+          ref={subtitleRef}
+          className="text-xl md:text-2xl text-text-secondary opacity-0"
+          style={{ fontFamily: "'Cairo', sans-serif" }}
+        >
+          ابتسامتك تبدأ من هنا ✨
+        </p>
+      </div>
+
+      <ScrollIndicator />
+    </section>
+  );
+}
