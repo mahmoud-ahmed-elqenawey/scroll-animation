@@ -15,10 +15,10 @@ export default function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Text slides from right (RTL)
+      // Text slides in from right (RTL)
       gsap.fromTo(
         textRef.current,
-        { opacity: 0, x: 100 },
+        { opacity: 0, x: 80 },
         {
           opacity: 1,
           x: 0,
@@ -26,27 +26,26 @@ export default function About() {
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 75%",
-            end: "top 25%",
-            scrub: true,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
           },
         }
       );
 
-      // Card slides from left (RTL)
+      // Card slides in from left (RTL)
       gsap.fromTo(
         cardRef.current,
-        { opacity: 0, x: -100 },
+        { opacity: 0, x: -80 },
         {
           opacity: 1,
           x: 0,
           duration: 1,
+          delay: 0.2,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 75%",
-            end: "top 25%",
-            scrub: true,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
           },
         }
       );
@@ -76,15 +75,15 @@ export default function About() {
       ref={sectionRef}
       className="relative py-24 md:py-32 px-4 md:px-8 overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto relative">
         {/* Horizontal line */}
         <div
           ref={lineRef}
-          className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-l from-accent/50 via-accent to-accent/50 origin-right"
+          className="hidden md:block absolute top-1/3 left-0 right-0 h-px bg-gradient-to-l from-accent/50 via-accent to-accent/50 origin-right z-0"
           style={{ transform: "scaleX(0)" }}
         />
 
-        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div className="relative z-10 grid md:grid-cols-2 gap-12 md:gap-16 items-start">
           {/* Text content */}
           <div ref={textRef} style={{ fontFamily: "'Cairo', sans-serif" }}>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
@@ -107,10 +106,10 @@ export default function About() {
             ref={cardRef}
             className="glass rounded-3xl p-8 md:p-10 relative overflow-hidden"
           >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-l from-accent to-highlight" />
-            <div className="space-y-6" style={{ fontFamily: "'Cairo', sans-serif" }}>
+            <div className="absolute top-0 right-0 left-0 h-1 bg-gradient-to-l from-accent to-highlight" />
+            <div className="space-y-4" style={{ fontFamily: "'Cairo', sans-serif" }}>
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
                   <svg
                     width="24"
                     height="24"
@@ -134,7 +133,7 @@ export default function About() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-3 gap-8 mt-20">
+        <div className="relative z-10 grid grid-cols-3 gap-8 mt-20 pt-8 border-t border-white/5">
           <AnimatedCounter end={10} suffix="+" label="سنوات خبرة" />
           <AnimatedCounter end={5000} suffix="+" label="مريض سعيد" />
           <AnimatedCounter end={15} suffix="+" label="خدمة متخصصة" />

@@ -25,14 +25,13 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title letter animation
+      // Word-by-word animation (not letter-by-letter — Arabic letters are connected)
       if (titleRef.current) {
-        const text = titleRef.current.textContent || "";
-        titleRef.current.innerHTML = text
-          .split("")
+        const words = (titleRef.current.textContent || "").split(" ");
+        titleRef.current.innerHTML = words
           .map(
-            (char) =>
-              `<span class="inline-block opacity-0 translate-y-[40px]">${char === " " ? "&nbsp;" : char}</span>`
+            (word) =>
+              `<span class="inline-block opacity-0 translate-y-[40px] mx-1">${word}</span>`
           )
           .join("");
 
@@ -40,7 +39,7 @@ export default function Hero() {
           opacity: 1,
           y: 0,
           duration: 0.8,
-          stagger: 0.04,
+          stagger: 0.12,
           ease: "power3.out",
           delay: 0.5,
         });
@@ -80,8 +79,6 @@ export default function Hero() {
         if (sceneWrapperRef.current) {
           gsap.to(sceneWrapperRef.current, {
             scale: 0.3,
-            x: "40vw",
-            y: "-30vh",
             opacity: 0.3,
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -121,16 +118,16 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* 3D Scene */}
-      <div ref={sceneWrapperRef} className="absolute inset-0 z-[1]">
+      {/* 3D Scene — behind text */}
+      <div ref={sceneWrapperRef} className="absolute inset-0 z-[1] opacity-70">
         <Scene />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+      {/* Content — above 3D */}
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pointer-events-none">
         <h1
           ref={titleRef}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
+          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight drop-shadow-[0_2px_30px_rgba(0,0,0,0.8)]"
           style={{ fontFamily: "'Cairo', sans-serif" }}
         >
           عيادة الابتسامة المثالية
