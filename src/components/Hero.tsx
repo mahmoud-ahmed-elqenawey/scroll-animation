@@ -114,7 +114,8 @@ export default function Hero() {
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pointer-events-none">
         <h1
           ref={titleRef}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight drop-shadow-[0_2px_30px_rgba(0,0,0,0.8)] opacity-0"
+          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight opacity-0"
+          style={{ textShadow: "0 2px 30px rgba(0,0,0,0.8)" }}
         >
           عيادة الابتسامة المثالية
         </h1>
