@@ -85,7 +85,7 @@ export default function About() {
 
         <div className="relative z-10 grid md:grid-cols-2 gap-12 md:gap-16 items-start">
           {/* Text content */}
-          <div ref={textRef} style={{ fontFamily: "'Cairo', sans-serif" }}>
+          <div ref={textRef}>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
               مرحباً بكم في{" "}
               <span className="gradient-text">عيادتنا</span>
@@ -107,7 +107,7 @@ export default function About() {
             className="glass rounded-3xl p-8 md:p-10 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 left-0 h-1 bg-gradient-to-l from-accent to-highlight" />
-            <div className="space-y-4" style={{ fontFamily: "'Cairo', sans-serif" }}>
+            <div className="space-y-4">
               <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center flex-shrink-0">
                   <svg

@@ -79,7 +79,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       className="py-24 md:py-32 px-4 md:px-8"
-      style={{ fontFamily: "'Cairo', sans-serif" }}
+
     >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
@@ -138,7 +138,7 @@ export default function Contact() {
                 </div>
                 <p className="font-semibold">ساعات العمل</p>
               </div>
-              <div className="space-y-3 mr-15">
+              <div className="space-y-3 mr-16">
                 {workingHours.map((wh, i) => (
                   <div
                     key={i}

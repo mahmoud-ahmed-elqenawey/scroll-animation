@@ -25,31 +25,18 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Word-by-word animation (not letter-by-letter — Arabic letters are connected)
-      if (titleRef.current) {
-        const words = (titleRef.current.textContent || "").split(" ");
-        titleRef.current.innerHTML = words
-          .map(
-            (word) =>
-              `<span class="inline-block opacity-0 translate-y-[40px] mx-1">${word}</span>`
-          )
-          .join("");
-
-        gsap.to(titleRef.current.querySelectorAll("span"), {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.12,
-          ease: "power3.out",
-          delay: 0.5,
-        });
-      }
+      // Animate entire title as one unit — never split Arabic text
+      gsap.fromTo(
+        titleRef.current,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.5 }
+      );
 
       // Subtitle fade in
       gsap.fromTo(
         subtitleRef.current,
         { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1, delay: 1.5, ease: "power3.out" }
+        { opacity: 1, y: 0, duration: 1, delay: 1.2, ease: "power3.out" }
       );
 
       // Scroll-driven exit animations
@@ -127,15 +114,13 @@ export default function Hero() {
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto pointer-events-none">
         <h1
           ref={titleRef}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight drop-shadow-[0_2px_30px_rgba(0,0,0,0.8)]"
-          style={{ fontFamily: "'Cairo', sans-serif" }}
+          className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight drop-shadow-[0_2px_30px_rgba(0,0,0,0.8)] opacity-0"
         >
           عيادة الابتسامة المثالية
         </h1>
         <p
           ref={subtitleRef}
           className="text-xl md:text-2xl text-text-secondary opacity-0"
-          style={{ fontFamily: "'Cairo', sans-serif" }}
         >
           ابتسامتك تبدأ من هنا ✨
         </p>

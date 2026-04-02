@@ -47,7 +47,6 @@ export default function Testimonials() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Cards animate in with 3D rotation
       const cards = sectionRef.current?.querySelectorAll(".testimonial-card");
       cards?.forEach((card, i) => {
         gsap.fromTo(
@@ -68,7 +67,6 @@ export default function Testimonials() {
         );
       });
 
-      // Stars sparkle animation
       const stars = sectionRef.current?.querySelectorAll(".star-icon");
       stars?.forEach((star, i) => {
         gsap.fromTo(
@@ -94,7 +92,7 @@ export default function Testimonials() {
     return () => ctx.revert();
   }, []);
 
-  // Auto-scroll carousel
+  // Auto-scroll carousel — RTL direction (negative scrollLeft)
   useEffect(() => {
     if (!carouselRef.current || isPaused) return;
 
@@ -104,8 +102,8 @@ export default function Testimonials() {
     const speed = 0.5;
 
     const scroll = () => {
-      scrollPos += speed;
-      if (scrollPos >= carousel.scrollWidth / 2) {
+      scrollPos -= speed;
+      if (Math.abs(scrollPos) >= carousel.scrollWidth / 2) {
         scrollPos = 0;
       }
       carousel.scrollLeft = scrollPos;
@@ -121,7 +119,7 @@ export default function Testimonials() {
       ref={sectionRef}
       className="py-24 md:py-32 px-4 md:px-8 relative overflow-hidden"
     >
-      {/* Subtle moving gradient background */}
+      {/* Background */}
       <div
         className="absolute inset-0 opacity-30"
         style={{
@@ -131,7 +129,7 @@ export default function Testimonials() {
       />
 
       <div className="relative max-w-6xl mx-auto z-10">
-        <div className="text-center mb-16" style={{ fontFamily: "'Cairo', sans-serif" }}>
+        <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             ماذا يقول <span className="gradient-text">مرضانا</span>
           </h2>
@@ -142,24 +140,19 @@ export default function Testimonials() {
 
         <div
           ref={carouselRef}
-          className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide cursor-grab"
-          style={{
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-          }}
+          className="flex gap-6 overflow-x-auto pb-4 cursor-grab"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          {/* Duplicate for infinite scroll */}
           {[...testimonials, ...testimonials].map((testimonial, index) => (
             <div
               key={index}
               className="testimonial-card min-w-[320px] md:min-w-[380px] flex-shrink-0"
             >
-              <div className="glass rounded-2xl p-6 md:p-8 h-full relative" style={{ fontFamily: "'Cairo', sans-serif" }}>
+              <div className="glass rounded-2xl p-6 md:p-8 h-full relative">
                 <Quote className="w-8 h-8 text-accent/20 absolute top-4 left-4" />
 
-                {/* Stars */}
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star

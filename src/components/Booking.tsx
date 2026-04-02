@@ -101,8 +101,7 @@ export default function Booking() {
         <div
           ref={fieldsRef}
           className="glass rounded-3xl p-8 md:p-12 max-w-2xl mx-auto"
-          style={{ fontFamily: "'Cairo', sans-serif" }}
-        >
+                 >
           <div className="space-y-6">
             <div className="form-field">
               <label className="block text-sm text-text-secondary mb-2">

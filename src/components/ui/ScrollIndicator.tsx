@@ -20,8 +20,8 @@ export default function ScrollIndicator() {
 
   return (
     <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
-      <span className="text-text-secondary text-xs tracking-widest uppercase">
-        Scroll
+      <span className="text-text-secondary text-xs">
+        مرر للأسفل
       </span>
       <div ref={ref}>
         <svg

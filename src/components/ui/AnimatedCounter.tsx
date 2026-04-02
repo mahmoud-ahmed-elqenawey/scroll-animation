@@ -57,7 +57,7 @@ export default function AnimatedCounter({
         {count}
         {suffix}
       </div>
-      <div className="text-text-secondary text-sm md:text-base" style={{ fontFamily: "'Cairo', sans-serif" }}>
+      <div className="text-text-secondary text-sm md:text-base">
         {label}
       </div>
     </div>

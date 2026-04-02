@@ -66,12 +66,10 @@ export default function Services() {
     const mm = gsap.matchMedia();
 
     mm.add("(min-width: 768px)", () => {
-      // Calculate how far to scroll: total cards width minus viewport
       const totalScroll = track.scrollWidth - window.innerWidth + 100;
 
       gsap.to(track, {
-        // In RTL, we need positive x to scroll "left" (which is forward in RTL)
-        x: () => totalScroll,
+        x: () => -totalScroll,
         ease: "none",
         scrollTrigger: {
           trigger: section,
@@ -112,28 +110,20 @@ export default function Services() {
       className="relative py-20 md:py-0 md:h-screen overflow-hidden"
     >
       <div className="h-full flex flex-col justify-center">
-        {/* Title - always visible */}
+        {/* Title */}
         <div className="px-6 md:px-16 mb-10 md:mb-0 md:absolute md:top-[12%] md:right-8 z-10">
-          <h2
-            className="text-3xl md:text-5xl font-bold mb-3"
-            style={{ fontFamily: "'Cairo', sans-serif" }}
-          >
+          <h2 className="text-3xl md:text-5xl font-bold mb-3">
             <span className="gradient-text">خدماتنا</span> المتخصصة
           </h2>
-          <p
-            className="text-text-secondary text-lg"
-            style={{ fontFamily: "'Cairo', sans-serif" }}
-          >
+          <p className="text-text-secondary text-lg">
             نقدم مجموعة شاملة من خدمات طب الأسنان
           </p>
         </div>
 
-        {/* Cards track */}
+        {/* Cards track — inherits RTL from page */}
         <div
           ref={trackRef}
           className="flex flex-col md:flex-row gap-6 md:gap-8 px-6 md:px-16 md:mt-16"
-          dir="ltr"
-          style={{ fontFamily: "'Cairo', sans-serif" }}
         >
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -141,7 +131,6 @@ export default function Services() {
               <div
                 key={index}
                 className="service-card md:min-w-[340px] md:w-[340px] flex-shrink-0"
-                dir="rtl"
               >
                 <GlassmorphCard className="h-full group cursor-pointer">
                   <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">

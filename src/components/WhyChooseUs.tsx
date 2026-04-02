@@ -144,7 +144,7 @@ export default function WhyChooseUs() {
       </div>
 
       <div className="relative max-w-6xl mx-auto z-10">
-        <div className="text-center mb-20" style={{ fontFamily: "'Cairo', sans-serif" }}>
+        <div className="text-center mb-20">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">
             لماذا <span className="gradient-text">تختارنا</span>؟
           </h2>
@@ -153,7 +153,7 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8" style={{ fontFamily: "'Cairo', sans-serif" }}>
+        <div className="grid md:grid-cols-2 gap-8">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (

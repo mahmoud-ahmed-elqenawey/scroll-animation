@@ -2,7 +2,7 @@
 
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Environment, Float } from "@react-three/drei";
+import { Environment, Float, Html } from "@react-three/drei";
 import ToothModel from "./ToothModel";
 
 export default function Scene() {
@@ -14,7 +14,7 @@ export default function Scene() {
         gl={{ antialias: true, alpha: true }}
         style={{ background: "transparent" }}
       >
-        <Suspense fallback={null}>
+        <Suspense fallback={<Html center><div className="w-12 h-12 border-2 border-[#00D4AA] border-t-transparent rounded-full animate-spin" /></Html>}>
           <ambientLight intensity={0.4} />
           <directionalLight position={[5, 5, 5]} intensity={1} />
           <pointLight position={[-5, -5, 5]} intensity={0.5} color="#00D4AA" />

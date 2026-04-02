@@ -37,8 +37,7 @@ export default function Footer() {
       <footer
         ref={footerRef}
         className="relative bg-[#050510] py-12 px-4 md:px-8"
-        style={{ fontFamily: "'Cairo', sans-serif" }}
-      >
+             >
         {/* Top gradient line */}
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-l from-transparent via-accent/50 to-transparent" />
 
