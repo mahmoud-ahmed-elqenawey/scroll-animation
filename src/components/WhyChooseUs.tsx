@@ -88,10 +88,9 @@ export default function WhyChooseUs() {
         const feat = features[i];
         gsap.fromTo(
           el,
-          { opacity: 0, x: feat.direction.x, y: feat.direction.y },
+          { opacity: 0, y: 40 },
           {
             opacity: 1,
-            x: 0,
             y: 0,
             duration: 1,
             ease: "power3.out",

@@ -15,13 +15,13 @@ export default function About() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Text slides in from right (RTL)
+      // Text fades up
       gsap.fromTo(
         textRef.current,
-        { opacity: 0, x: 80 },
+        { opacity: 0, y: 50 },
         {
           opacity: 1,
-          x: 0,
+          y: 0,
           duration: 1,
           ease: "power3.out",
           scrollTrigger: {
@@ -32,13 +32,13 @@ export default function About() {
         }
       );
 
-      // Card slides in from left (RTL)
+      // Card fades up with delay
       gsap.fromTo(
         cardRef.current,
-        { opacity: 0, x: -80 },
+        { opacity: 0, y: 50 },
         {
           opacity: 1,
-          x: 0,
+          y: 0,
           duration: 1,
           delay: 0.2,
           ease: "power3.out",
@@ -73,7 +73,7 @@ export default function About() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 px-4 md:px-8 overflow-hidden"
+      className="relative py-24 md:py-32 px-6 md:px-12 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto relative">
         {/* Horizontal line */}
@@ -83,19 +83,19 @@ export default function About() {
           style={{ transform: "scaleX(0)" }}
         />
 
-        <div className="relative z-10 grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+        <div className="relative z-10 grid md:grid-cols-2 gap-10 md:gap-12 items-start">
           {/* Text content */}
           <div ref={textRef}>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
               مرحباً بكم في{" "}
               <span className="gradient-text">عيادتنا</span>
             </h2>
-            <p className="text-text-secondary text-lg leading-relaxed mb-6">
+            <p className="text-text-secondary text-base md:text-lg leading-relaxed mb-6">
               نقدم لكم أحدث التقنيات في عالم طب الأسنان مع فريق من الأطباء
               المتخصصين الذين يحرصون على راحتكم وصحة ابتسامتكم. نؤمن بأن كل
               ابتسامة تستحق العناية المثالية.
             </p>
-            <p className="text-text-secondary text-lg leading-relaxed">
+            <p className="text-text-secondary text-base md:text-lg leading-relaxed">
               عيادتنا مجهزة بأحدث الأجهزة والتقنيات العالمية لضمان أفضل
               النتائج في أقل وقت ممكن وبأعلى معايير الجودة والسلامة.
             </p>
